@@ -1,0 +1,2 @@
+export const NUMBER_OF_PHOTOS = 4
+export const INSTAGRAM_PLACEHOLDER = '{{{INSTAGRAM_PLACEHOLDER}}}'
