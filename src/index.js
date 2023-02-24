@@ -1,5 +1,5 @@
 import { resolve } from 'path'
-import { NUMBER_OF_PHOTOS, INSTAGRAM_PLACEHOLDER } from './constants'
+import { NUMBER_OF_PHOTOS, INSTAGRAM_PLACEHOLDER } from './constants.js'
 
 const { INSTAGRAM_API_KEY } = process.env
 const INSTAGRAM_USER_ID = '25025320'
