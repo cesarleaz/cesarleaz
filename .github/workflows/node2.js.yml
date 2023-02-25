@@ -12,6 +12,11 @@ on:
   schedule:
     - cron: '0 */4 * * *'
 
+permissions:
+  pull-requests: write
+  issues: write
+  repository-projects: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
