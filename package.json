@@ -3,6 +3,6 @@
   "version": "1.0.0",
   "description": "This is my personal repo for README",
   "scripts": {
-    "update": "node src/index.js"
+    "update-readme": "node src/index.js"
   }
 }
