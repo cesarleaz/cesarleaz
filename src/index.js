@@ -3,7 +3,7 @@ const { NUMBER_OF_PHOTOS, INSTAGRAM_PLACEHOLDER } = require('./constants.js')
 const fs = require('fs').promises
 
 const { INSTAGRAM_API_KEY } = process.env
-const INSTAGRAM_USER_ID = '25025320'
+const INSTAGRAM_USER_ID = '5366714243'
 
 const getLatestPhotoFromInstagram = async () => {
   const response = await fetch(
@@ -29,8 +29,6 @@ const createInstagramHtmlComponent = ({
 </a>`
 
 ;(async () => {
-  // await getLatestTwitchStream()
-
   const [template, photos] = await Promise.all([
     fs.readFile('./src/README.md.tpl', { encoding: 'utf-8' }),
     getLatestPhotoFromInstagram(),
