@@ -14,7 +14,7 @@ const getLatestPhotoFromInstagram = async () => {
         'x-rapidapi-key': INSTAGRAM_API_KEY,
       },
     }
-  )
+  ).catch(error => console.error('failed fetch', error))
 
   const json = await response.json()
 
