@@ -50,5 +50,5 @@ const createInstagramHtmlComponent = ({
     await fs.writeFile(resolve('README.md'), newMarkdown)
   } catch (error) {
     console.error(error)
-   )
+  }
 })()
