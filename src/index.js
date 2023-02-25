@@ -1,6 +1,6 @@
-const { resolve } = require('path')
-const { NUMBER_OF_PHOTOS, INSTAGRAM_PLACEHOLDER } = require('./constants.js')
-const fs = require('fs').promises
+import { resolve } from 'path'
+import { NUMBER_OF_PHOTOS, INSTAGRAM_PLACEHOLDER } from './constants.js'
+import { promises as fs } from 'fs'
 
 const { INSTAGRAM_API_KEY } = process.env
 const INSTAGRAM_USER_ID = '5366714243'
@@ -14,7 +14,7 @@ const getLatestPhotoFromInstagram = async () => {
         'x-rapidapi-key': INSTAGRAM_API_KEY,
       },
     }
-  ).catch(error => console.error('failed fetch', error))
+  )
 
   const json = await response.json()
 
