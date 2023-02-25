@@ -29,21 +29,26 @@ const createInstagramHtmlComponent = ({
 </a>`
 
 ;(async () => {
-  const [template, photos] = await Promise.all([
-    fs.readFile('./src/README.md.tpl', { encoding: 'utf-8' }),
-    getLatestPhotoFromInstagram(),
-  ])
+  try {
+    const [template, photos] = await Promise.all([
+      fs.readFile('./src/README.md.tpl', { encoding: 'utf-8' }),
+      getLatestPhotoFromInstagram(),
+    ])
 
-  // create latest photos from instagram
-  const latestInstagramPhotos = photos
-    .map(createInstagramHtmlComponent)
-    .join('')
+    // create latest photos from instagram
+    const latestInstagramPhotos = photos
+      .slice(0, NUMBER_OF_PHOTOS)
+      .map(createInstagramHtmlComponent)
+      .join('')
 
-  // replace all placeholders with info
-  const newMarkdown = template.replace(
-    INSTAGRAM_PLACEHOLDER,
-    latestInstagramPhotos
-  )
+    // replace all placeholders with info
+    const newMarkdown = template.replace(
+      INSTAGRAM_PLACEHOLDER,
+      latestInstagramPhotos
+    )
 
-  await fs.writeFile(resolve('README.md'), newMarkdown)
+    await fs.writeFile(resolve('README.md'), newMarkdown)
+  } catch (error) {
+    console.error(error)
+   )
 })()
