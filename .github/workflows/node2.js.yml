@@ -22,7 +22,7 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: 18.x
-    - run: npm run update-template
+    - run: npm run update-readme
       env:
         INSTAGRAM_API_KEY: ${{ secrets.INSTAGRAM_API_KEY }}
     - run: |
