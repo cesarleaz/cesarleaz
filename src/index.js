@@ -1,24 +1,24 @@
-import { resolve } from 'path'
-import { NUMBER_OF_PHOTOS, INSTAGRAM_PLACEHOLDER } from './constants.js'
+const { resolve } = require('path')
+const { NUMBER_OF_PHOTOS, INSTAGRAM_PLACEHOLDER } = require('./constants.js')
+const fs = require('fs').promises
 
 const { INSTAGRAM_API_KEY } = process.env
 const INSTAGRAM_USER_ID = '25025320'
 
-const getLatestInstagramPost = async () => {
+const getLatestPhotoFromInstagram = async () => {
   const response = await fetch(
-    `https://instagram28.p.rapidapi.com/medias?user_id=${INSTAGRAM_USER_ID}&batch_size=${NUMBER_OF_PHOTOS}`,
+    `https://instagram130.p.rapidapi.com/account-medias?userid=${INSTAGRAM_USER_ID}&first=${NUMBER_OF_PHOTOS}`,
     {
       headers: {
-        'X-RapidAPI-Host': 'instagram28.p.rapidapi.com',
-        'X-RapidAPI-Key': INSTAGRAM_API_KEY,
+        'x-rapidapi-host': 'instagram130.p.rapidapi.com',
+        'x-rapidapi-key': INSTAGRAM_API_KEY,
       },
     }
   )
+
   const json = await response.json()
 
-  console.log(json)
-
-  return json.data.user?.edgeownertotimelinemedia?.edges
+  return json?.edges
 }
 
 const createInstagramHtmlComponent = ({
@@ -33,7 +33,7 @@ const createInstagramHtmlComponent = ({
 
   const [template, photos] = await Promise.all([
     fs.readFile('./src/README.md.tpl', { encoding: 'utf-8' }),
-    getLatestInstagramPost(),
+    getLatestPhotoFromInstagram(),
   ])
 
   // create latest photos from instagram

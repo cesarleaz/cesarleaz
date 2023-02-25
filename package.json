@@ -1,7 +1,6 @@
 {
   "name": "gabriedev",
   "version": "1.0.0",
-  "type": "module",
   "description": "This is my personal repo for README",
   "scripts": {
     "update": "node src/index.js"

@@ -2,34 +2,33 @@ name: Update README.md
 
 on:
   push:
-    branches: ['main']
-  
+    branches:
+      - main
   workflow_dispatch:
-  
+
   schedule:
-    - cron: "0 */4 * * *"
+    - cron: '0 */4 * * *'
 
 jobs:
   build:
-    environment:
-      name: Build
     runs-on: ubuntu-latest
+
     steps:
-    - name: Checkout
-    - uses: actions/checkout@v2
-    - uses: actions/setup-node@v1
-      with:
-        node-version: 18
-    - name: Install dependencies
-    - run: npm install
-    - name: Update README
-    - run: npm run update
-      env:
-        INSTAGRAM_API_KEY: ${{ secrets.INSTAGRAM_API_KEY }}
-    - name: Git commit
-    - run: |
-        git config user.name gabriedev
-        git config user.email gabriedev@gmail.com
-        git add README.md
-        git diff --quiet && git diff --staged --quiet || git commit -m "[bot] Update README with latest info"
-        git push origin main
+      - name: Checkout
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '16'
+      - name: Install dependencies
+      - run: npm install
+      - name: Update README.md
+      - run: npm run update-readme
+        env:
+          INSTAGRAM_API_KEY: ${{ secrets.INSTAGRAM_API_KEY }}
+      - name: Commit and push
+      - run: |
+          git config user.name gabriedev
+          git config user.email gabriedev@gmail.com
+          git add README.md
+          git diff --quiet && git diff --staged --quiet || git commit -m "[bot] Update README with latest info"
+          git push origin main
