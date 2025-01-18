@@ -1,35 +1,35 @@
 import { resolve } from 'path'
 import { NUMBER_OF_PHOTOS, INSTAGRAM_PLACEHOLDER } from './constants.js'
-import { promises as fs } from 'fs'
+import fs from 'fs/promises'
 
 const { INSTAGRAM_API_KEY } = process.env
-const INSTAGRAM_USER_ID = '62908961058'
+const INSTAGRAM_USERNAME = 'cesarsoftware.dev'
 
 const getLatestPhotoFromInstagram = async () => {
   const response = await fetch(
-    `https://instagram130.p.rapidapi.com/account-medias?userid=${INSTAGRAM_USER_ID}&first=${NUMBER_OF_PHOTOS}`,
+    `https://instagram230.p.rapidapi.com/user/posts?username=${INSTAGRAM_USERNAME}`,
     {
       headers: {
-        'x-rapidapi-host': 'instagram130.p.rapidapi.com',
+		    'x-rapidapi-host': 'instagram230.p.rapidapi.com'
         'x-rapidapi-key': INSTAGRAM_API_KEY,
       },
     }
   )
 
-  const json = await response.json()
+  const result = await response.json()
 
-  return json?.edges
+  return result.items.map(item => {
+    const image = item.image_versions2.candidates[0]
+    return { src: image.url, shortcode: item.code }
+  })
 }
 
-const createInstagramHtmlComponent = ({
-  node: { display_url: url, shortcode },
-}) => `
+const createInstagramHtmlComponent = ({ src, shortcode }) => `
 <a href='https://instagram.com/p/${shortcode}' target='_blank'>
-  <img width='20%' src='${url}' alt='Instagram photo' />
+  <img width='20%' src='${src}' alt='Instagram photo' />
 </a>`
 
 ;(async () => {
-  try {
     const [template, photos] = await Promise.all([
       fs.readFile('./src/README.md.tpl', { encoding: 'utf-8' }),
       getLatestPhotoFromInstagram(),
@@ -48,7 +48,4 @@ const createInstagramHtmlComponent = ({
     )
 
     await fs.writeFile(resolve('README.md'), newMarkdown)
-  } catch (error) {
-    console.error(error)
-  }
 })()
