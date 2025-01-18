@@ -16,6 +16,8 @@ const getLatestPhotoFromInstagram = async () => {
     }
   )
 
+  if (!result.ok) throw new Error(response)
+
   const result = await response.json()
 
   return result.items.map(item => {
