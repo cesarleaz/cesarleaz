@@ -3,7 +3,7 @@ import { NUMBER_OF_PHOTOS, INSTAGRAM_PLACEHOLDER } from './constants.js'
 import { promises as fs } from 'fs'
 
 const { INSTAGRAM_API_KEY } = process.env
-const INSTAGRAM_USER_ID = '5366714243'
+const INSTAGRAM_USER_ID = '62908961058'
 
 const getLatestPhotoFromInstagram = async () => {
   const response = await fetch(
