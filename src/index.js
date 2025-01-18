@@ -10,8 +10,8 @@ const getLatestPhotoFromInstagram = async () => {
     `https://instagram230.p.rapidapi.com/user/posts?username=${INSTAGRAM_USERNAME}`,
     {
       headers: {
-		    'x-rapidapi-host': 'instagram230.p.rapidapi.com'
-        'x-rapidapi-key': INSTAGRAM_API_KEY,
+        'x-rapidapi-host': 'instagram230.p.rapidapi.com',
+        'x-rapidapi-key': INSTAGRAM_API_KEY
       },
     }
   )
